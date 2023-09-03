@@ -1,0 +1,75 @@
+import empleados.*
+
+describe 'test Galvan'{
+	
+	test "Galván gasta 40000, totalDeuda() debe ser 40000, totalDinero() debe ser 0." {
+		galvan.gastar(40000)
+		
+		assert.equals(40000, galvan.totalDeuda())
+		assert.that(galvan.totalDinero() == 0)
+	}
+	
+	test 'Galván gasta otros 80000, totalDeuda() pasa a 120000, totalDinero() sigue en 0.' {
+		galvan.gastar(40000)
+		galvan.gastar(80000)
+		
+		assert.equals(120000, galvan.totalDeuda())
+		assert.that(galvan.totalDinero() == 0)
+	}	
+	
+	test 'Galván cobra, con los 150000 que recibe paga toda su deuda y le sobran 30000 pesos. 
+		  Por lo tanto, totalDeuda() debe ser 0, y totalDinero() debe ser 30000.' {
+		galvan.gastar(40000)
+		galvan.gastar(80000)
+		galvan.cobrarSueldo()
+		
+		assert.equals(0, galvan.totalDeuda())
+		assert.that(galvan.totalDinero() == 30000)
+	}
+	
+	test 'Galván gasta 250000, cubre 30000 con el dinero que tiene, el resto es deuda. 
+		  totalDeuda() queda en 220000, totalDinero() en 0.' {
+		galvan.gastar(40000)
+		galvan.gastar(80000)
+		galvan.cobrarSueldo()
+		galvan.gastar(250000)
+		
+		assert.equals(220000, galvan.totalDeuda())
+		assert.that(galvan.totalDinero() == 0)
+	}
+	
+	test 'Galván cobra, tiene que dedicar los 150000 a pagar deudas, y no le alcanza. 
+		  Ahora, totalDeuda() pasa a 70000, y totalDinero() a 0.' {
+		galvan.gastar(40000)
+		galvan.gastar(80000)
+		galvan.cobrarSueldo()
+		galvan.gastar(250000)
+		galvan.cobrarSueldo()
+		
+		assert.equals(70000, galvan.totalDeuda())
+		assert.that(galvan.totalDinero() == 0)
+	}
+}
+
+describe 'test Baigorria'{
+	
+	test "Baigorria tiene un total de 600 empanadas vendidas, su sueldo es 150 pesos por cada
+		  empanada vendida, por lo tanto sueldo() deberia ser 90000" {
+		baigorria.cobrarSueldo()
+		
+		assert.equals(90000, baigorria.sueldo())
+	}
+	
+	test "Baigorria va ahorrando su sueldo cada vez que cobra, por lo tanto , luego de vender 
+		  800 empanadas el mes siguiente su sueldo() deberia ser 120000 y el totalDinero 210000" {
+		baigorria.cobrarSueldo()
+		baigorria.empanadasVendidas(800)
+		baigorria.cobrarSueldo()
+		
+		assert.equals(120000, baigorria.sueldo())
+		assert.that(baigorria.totalDinero() == 210000)
+	}
+}
+
+
+

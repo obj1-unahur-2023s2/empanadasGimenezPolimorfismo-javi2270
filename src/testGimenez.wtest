@@ -1,0 +1,22 @@
+import empleados.*
+import gimenez.*
+
+describe 'test Gimenez' {
+	
+	test 'Gimenez le paga el sueldo a baigorria que vendio 600 empanadas por lo que se le 
+		  descuenta 90000 de los 3000000 que tiene para pagar los sueldos, queda 2910000' {
+		  	gimenez.pagarA(baigorria)
+		  	
+		  	assert.equals(90000, baigorria.totalDinero())
+		  	assert.that(gimenez.dinero() == 2910000)
+		  }
+		  
+		  test 'Gimenez le paga el sueldo a Galvan por lo que se le descuentan 150000 mas
+			   del fondo para pagar los sueldos, queda 2760000 y Galvan suma 150000.' {
+		  	gimenez.pagarA(baigorria)
+		  	gimenez.pagarA(galvan)
+		  	
+		  	assert.equals(150000, galvan.totalDinero())
+		  	assert.that(gimenez.dinero() == 2760000)
+		  }
+}
